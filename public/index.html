@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="style2.css">
+  <!-- <script src="http://code.jquery.com/jquery-1.7.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="jquery-3.1.1.min.js"></script>
+  <script>
+    var rootURL1;
+    //$(document).ready(function() {
+    var myurl = window.location.host;
+    console.log("location.host: " +myurl);
+    var protocol = window.location.protocol;
+    console.log("location.protocol: " +protocol);
+    //});
+  </script>
+  <script src="booksketch.js"></script>
+  <script src="customerSketch.js"></script>
+  <script src="rentalSketch.js"></script>
+  <script src="general.js"></script>
+
+</head>
+<body>
+
+<nav>
+<ul>
+  <li><a href="#home" id="homeLink">Home</a></li>
+  <li><a href="#books" id="bookLink">Books</a></li>
+  <li><a href="#customers" id="custlink">Customers</a></li>
+  <li><a href="#rentals" id="rentalsLink">Borrow books</a></li>
+</ul>
+</nav>
+
+<p id="demo"> </p>
+
+<h1>Welcome to the library</h1>
+<!--<script>
+  $(document).ready(function() {
+    $('#bookdiv').hide();
+    $('#customerDiv').hide();
+    $('#rentalsDiv').hide();
+    $('#homeDiv').show();
+  })
+</script>-->
+
+<div id="bookdiv">
+
+  <h2 id="books">Registered Books</h2>
+
+  <table class="bookTable">
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Author</th>
+      <th>ISBN</th>
+    </tr>
+  </table>
+
+  <h2>Add a book</h2>
+  <p>
+  <form>
+    ID:<br>
+    <input type="text" id="id" name="id">
+    <br>
+    Title:<br>
+    <input type="text" id="title" name="title">
+    <br>
+    Author:<br>
+    <input type="text" id="author" name="author">
+    <br>
+    ISBN:<br>
+    <input type="text" id="isbn" name="isbn">
+  </form>
+  <br>
+  <button id="addNewBook">add Book</button>
+  <br>
+  <br>
+  <button id="updateBook">update Book</button>
+  </p>
+
+  <h2>Delete a book</h2>
+  <p>
+    <form>
+      ID:<br>
+      <input type="text" id="deleteId" name="id">
+    </form> <br>
+    <button id="deleteButton">Delete</button>
+  </p>
+
+  <h2>Delete all books</h2>
+  <p> <button id="deleteAllbtn">Delete all</button>
+  </p>
+
+</div>
+<div id="customerDiv">
+  <h2 id="customers">Registered Customers</h2>
+
+  <table class="customerTable">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Password</th>
+    </tr>
+  </table>
+
+  <h2>Add a customer</h2>
+  <p>
+  <form>
+    ID:<br>
+    <input type="text" id="cId" name="id">
+    <br>
+    Name:<br>
+    <input type="text" id="cName" name="name">
+    <br>
+    Email:<br>
+    <input type="text" id="cEmail" name="email">
+    <br>
+    Password:<br>
+    <input type="text" id="cPassword" name="password">
+  </form>
+  <br>
+  <button id="addNewCustomer">add Customer</button>
+  <br>
+  <br>
+  <button id="updateCustomer">update Customer</button>
+  </p>
+
+  <h2>Delete a customer</h2>
+  <p>
+    <form>
+      ID:<br>
+      <input type="text" id="deleteCustId" name="id">
+    </form> <br>
+    <button id="deleteBtnC">Delete</button>
+  </p>
+
+  <h2>Delete all Customers</h2>
+  <p>
+    <button id="deleteAllCustomersbtn">Delete all</button>
+  </p>
+
+</div>
+
+<div id="rentalsDiv">
+  <h2>Registered borrowed Books</h2>
+  <table class="rentalsTable">
+    <tr>
+      <th>ID</th>
+      <th>Book</th>
+      <th>Customer</th>
+      <th>Start</th>
+      <th>End</th>
+    </tr>
+  </table>
+
+  <h2>Borrow a book</h2>
+  <p>
+  <form>
+    ID:<br>
+    <input type="text" id="rentalId" name="id">
+    <br>
+    Book Id:<br>
+    <input type="text" id="rentalbookid" name="bookid">
+    <br>
+    Customer Id:<br>
+    <input type="text" id="rentalcustomerid" name="customerid">
+    <br>
+    Start Date:<br>
+    <input type="text" id="start" name="start">
+    <br>
+    End Date:<br>
+    <input type="text" id="end" name="end">
+  </form>
+  <br>
+  <button id="addNewrental">borrow book</button>
+  <br>
+  <br>
+  <button id="updateRental">update</button>
+  </p>
+
+  <h2>Return a book</h2>
+  <p>
+    <form>
+      ID:<br>
+      <input type="text" id="deleteRentalId" name="id">
+    </form> <br>
+    <button id="deleteRentalBtn">Return</button>
+  </p>
+  <h2>Return all Books</h2>
+  <p>
+    <button id="deleteAllRentalsbtn">Return all</button>
+  </p>
+</div>
+
+
+</body>
+</html>

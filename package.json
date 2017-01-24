@@ -1,0 +1,15 @@
+{
+  "name": "libraryui",
+  "version": "1.0.0",
+  "description": "small webui for libarary api",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Flora Eggers",
+  "license": "ISC",
+  "dependencies": {
+    "compression": "^1.6.2",
+    "express": "^4.14.0"
+  }
+}
