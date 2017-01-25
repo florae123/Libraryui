@@ -1,7 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <link rel="stylesheet" href="style2.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!--<link rel="stylesheetMyOwnCss" href="style2.css">-->
   <!-- <script src="http://code.jquery.com/jquery-1.7.min.js"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="jquery-3.1.1.min.js"></script>
@@ -22,177 +27,280 @@
 </head>
 <body>
 
-<nav>
-<ul>
-  <li><a href="#home" id="homeLink">Home</a></li>
-  <li><a href="#books" id="bookLink">Books</a></li>
-  <li><a href="#customers" id="custlink">Customers</a></li>
-  <li><a href="#rentals" id="rentalsLink">Borrow books</a></li>
-</ul>
-</nav>
-
-<p id="demo"> </p>
-
-<h1>Welcome to the library</h1>
-<!--<script>
-  $(document).ready(function() {
-    $('#bookdiv').hide();
-    $('#customerDiv').hide();
-    $('#rentalsDiv').hide();
-    $('#homeDiv').show();
-  })
-</script>-->
-
-<div id="bookdiv">
-
-  <h2 id="books">Registered Books</h2>
-
-  <table class="bookTable">
-    <tr>
-      <th>ID</th>
-      <th>Title</th>
-      <th>Author</th>
-      <th>ISBN</th>
-    </tr>
-  </table>
-
-  <h2>Add a book</h2>
-  <p>
-  <form>
-    ID:<br>
-    <input type="text" id="id" name="id">
-    <br>
-    Title:<br>
-    <input type="text" id="title" name="title">
-    <br>
-    Author:<br>
-    <input type="text" id="author" name="author">
-    <br>
-    ISBN:<br>
-    <input type="text" id="isbn" name="isbn">
-  </form>
-  <br>
-  <button id="addNewBook">add Book</button>
-  <br>
-  <br>
-  <button id="updateBook">update Book</button>
-  </p>
-
-  <h2>Delete a book</h2>
-  <p>
-    <form>
-      ID:<br>
-      <input type="text" id="deleteId" name="id">
-    </form> <br>
-    <button id="deleteButton">Delete</button>
-  </p>
-
-  <h2>Delete all books</h2>
-  <p> <button id="deleteAllbtn">Delete all</button>
-  </p>
-
-</div>
-<div id="customerDiv">
-  <h2 id="customers">Registered Customers</h2>
-
-  <table class="customerTable">
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Password</th>
-    </tr>
-  </table>
-
-  <h2>Add a customer</h2>
-  <p>
-  <form>
-    ID:<br>
-    <input type="text" id="cId" name="id">
-    <br>
-    Name:<br>
-    <input type="text" id="cName" name="name">
-    <br>
-    Email:<br>
-    <input type="text" id="cEmail" name="email">
-    <br>
-    Password:<br>
-    <input type="text" id="cPassword" name="password">
-  </form>
-  <br>
-  <button id="addNewCustomer">add Customer</button>
-  <br>
-  <br>
-  <button id="updateCustomer">update Customer</button>
-  </p>
-
-  <h2>Delete a customer</h2>
-  <p>
-    <form>
-      ID:<br>
-      <input type="text" id="deleteCustId" name="id">
-    </form> <br>
-    <button id="deleteBtnC">Delete</button>
-  </p>
-
-  <h2>Delete all Customers</h2>
-  <p>
-    <button id="deleteAllCustomersbtn">Delete all</button>
-  </p>
-
+<div class="container-fluid">
+  <div class="page-header">
+    <h1>Welcome to the library</h1>
+  </div>
 </div>
 
-<div id="rentalsDiv">
-  <h2>Registered borrowed Books</h2>
-  <table class="rentalsTable">
-    <tr>
-      <th>ID</th>
-      <th>Book</th>
-      <th>Customer</th>
-      <th>Start</th>
-      <th>End</th>
-    </tr>
-  </table>
-
-  <h2>Borrow a book</h2>
-  <p>
-  <form>
-    ID:<br>
-    <input type="text" id="rentalId" name="id">
-    <br>
-    Book Id:<br>
-    <input type="text" id="rentalbookid" name="bookid">
-    <br>
-    Customer Id:<br>
-    <input type="text" id="rentalcustomerid" name="customerid">
-    <br>
-    Start Date:<br>
-    <input type="text" id="start" name="start">
-    <br>
-    End Date:<br>
-    <input type="text" id="end" name="end">
-  </form>
-  <br>
-  <button id="addNewrental">borrow book</button>
-  <br>
-  <br>
-  <button id="updateRental">update</button>
-  </p>
-
-  <h2>Return a book</h2>
-  <p>
-    <form>
-      ID:<br>
-      <input type="text" id="deleteRentalId" name="id">
-    </form> <br>
-    <button id="deleteRentalBtn">Return</button>
-  </p>
-  <h2>Return all Books</h2>
-  <p>
-    <button id="deleteAllRentalsbtn">Return all</button>
-  </p>
+<div class="container-fluid">
+  <nav class="navbar navbar-inverse">
+    <ul class="nav navbar-nav">
+      <li><a data-toggle="tab" href="#home" id="homeLink">Home</a></li>
+      <li><a data-toggle="tab" href="#bookdiv" id="bookLink">Books</a></li>
+      <li><a data-toggle="tab" href="#customerDiv" id="custlink">Customers</a></li>
+      <li><a data-toggle="tab" href="#rentalsDiv" id="rentalsLink">Borrow books</a></li>
+    </ul>
+  </nav>
 </div>
 
+<div class="container-fluid">
+<div class="tab-content">
+
+  <div class="tab-pane fade" id="home"></div>
+
+  <div class="tab-pane fade" id="bookdiv">
+
+    <h2>Registered Books</h2>
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Author</th>
+          <th>ISBN</th>
+        </tr>
+      </thead>
+      <tbody id="bookTableRows">
+      </tbody>
+    </table>
+
+    <h2>Add a book</h2>
+
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="id">ID:</label>
+        <div class="col-sm-5">
+          <input type="text" class="form-control" id="id" placeholder="Enter ID">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="title">Title:</label>
+        <div class="col-sm-5">
+          <input type="text" class="form-control" id="title" placeholder="Enter Title">
+          </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="author">Author:</label>
+        <div class="col-sm-5">
+          <input type="text" class="form-control" id="author" placeholder="Enter Author">
+          </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="isbn">ISBN:</label>
+        <div class="col-sm-5">
+          <input type="text" class="form-control" id="isbn" placeholder="Enter ISBN">
+          </div>
+      </div>
+      <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-2">
+            <button type="button" class="btn btn-default" id="addNewBook">add Book</button>
+          </div>
+          <div class="col-sm-1">
+            <button type="button" class="btn btn-default" id="updateBook">update Book</button>
+          </div>
+      </div>
+    </form>
+
+
+    <h2>Delete a book</h2>
+
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="deleteId">ID:</label>
+        <div class="col-sm-5">
+          <input type="text" class="form-control" id="deleteId" placeholder="Enter ID">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-2">
+          <button type="button" class="btn btn-default" id="deleteButton">Delete</button>
+        </div>
+      </div>
+    </form>
+
+
+    <h2>Delete all books</h2>
+    <form class="form-horizontal">
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-2">
+          <button type="button" class="btn btn-default" id="deleteAllbtn">Delete all</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+  <div class="tab-pane fade" id="customerDiv">
+    <h2>Registered Customers</h2>
+
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Password</th>
+        </tr>
+      </thead>
+      <tbody id="customerTableRows">
+      </tbody>
+    </table>
+
+    <h2>Add a customer</h2>
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="cId">ID:</label>
+          <div class="col-sm-5">
+            <input type="text" class="form-control" id="cId" placeholder="Enter ID">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="cName">Name:</label>
+          <div class="col-sm-5">
+            <input type="text" class="form-control" id="cName" placeholder="Enter Name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="cEmail">Email:</label>
+          <div class="col-sm-5">
+            <input type="text" class="form-control" id="cEmail" placeholder="Enter Email">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="cPassword">Password:</label>
+          <div class="col-sm-5">
+            <input type="text" class="form-control" id="cPassword" placeholder="Enter Password">
+          </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-2">
+              <button type="button" class="btn btn-default" id="addNewCustomer">add Customer</button>
+            </div>
+            <div class="col-sm-1">
+              <button type="button" class="btn btn-default" id="updateCustomer">update Customer</button>
+            </div>
+        </div>
+    </form>
+
+
+    <h2>Delete a customer</h2>
+
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="deleteCustId">ID:</label>
+        <div class="col-sm-5">
+          <input type="text" class="form-control" id="deleteCustId" placeholder="Enter ID">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-2">
+          <button type="button" class="btn btn-default" id="deleteBtnC">Delete</button>
+        </div>
+      </div>
+    </form>
+
+
+    <h2>Delete all customers</h2>
+    <form class="form-horizontal">
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-2">
+          <button type="button" class="btn btn-default" id="deleteAllCustomersbtn">Delete all</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+  <div class="tab-pane fade" id="rentalsDiv">
+    <h2>Registered borrowed Books</h2>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Book</th>
+          <th>Customer</th>
+          <th>Start</th>
+          <th>End</th>
+        </tr>
+      </thead>
+      <tbody id="rentalsTableRows">
+      </tbody>
+    </table>
+
+    <h2>Borrow a book</h2>
+
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="rentalId">ID:</label>
+        <div class="col-sm-5">
+          <input type="text" class="form-control" id="rentalId" placeholder="Enter ID">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="rentalbookid">Book ID:</label>
+        <div class="col-sm-5">
+          <input type="text" class="form-control" id="rentalbookidId" placeholder="Enter Book ID">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="rentalcustomerid">Customer ID:</label>
+        <div class="col-sm-5">
+          <input type="text" class="form-control" id="rentalcustomeridId" placeholder="Enter Customer ID">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="start">Start Date:</label>
+        <div class="col-sm-5">
+          <input type="text" class="form-control" id="start" placeholder="Enter Start Date">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="end">End Date:</label>
+        <div class="col-sm-5">
+          <input type="text" class="form-control" id="end" placeholder="Enter End Date">
+        </div>
+      </div>
+      <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-2">
+            <button type="button" class="btn btn-default" id="addNewrental">borrow book</button>
+          </div>
+          <div class="col-sm-1">
+            <button type="button" class="btn btn-default" id="updateRental">update</button>
+          </div>
+      </div>
+    </form>
+
+    <h2>Return a book</h2>
+
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="deleteRentalId">ID:</label>
+        <div class="col-sm-5">
+          <input type="text" class="form-control" id="deleteRentalId" placeholder="Enter ID">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-2">
+          <button type="button" class="btn btn-default" id="deleteRentalBtn">Return</button>
+        </div>
+      </div>
+    </form>
+
+    <h2>Return all books</h2>
+    <form class="form-horizontal">
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-2">
+          <button type="button" class="btn btn-default" id="deleteAllRentalsbtn">Return all</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+</div>
+</div>
 
 </body>
 </html>

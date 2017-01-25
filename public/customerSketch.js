@@ -1,9 +1,24 @@
-$.ajax({
-	type: 'GET',
-	url: myurl,
-	dataType: 'json', // data type of response
-	success: function(data){
-	rootURL1 = data.uri;
+if(protocol=="file:" || protocol=='http:'){
+	console.log("You are in the local files.");
+	var rootURL1 = 'http://localhost:9080/JavaRESTAPI/api';
+	executeCustomer();
+} else {
+	var myurl = protocol + '//' + myurl + "/apiuri";
+	console.log('The rootURL1 is found at: '+myurl);
+		$.ajax({
+			type: 'GET',
+			url: myurl,
+			dataType: 'json', // data type of response
+			success: function(data){
+				rootURL1 = data.uri;
+				console.log('The rootURL1 is: '+rootURL1);
+				executeCustomer();
+			}
+		});
+}
+
+function executeCustomer(){
+
 var rootURLcust = rootURL1 + "/customers";
 console.log(rootURL1);
 console.log(rootURLcust);
@@ -14,7 +29,7 @@ $(document).ready(function() {
         url: rootURLcust
     }).then(function(data) {
       $.each( data, function( key, val ) {
-        $('.customerTable').append(
+        $('#customerTableRows').append(
           "<tr> <td>"+val.id+"</td> <td>"+val.name+"</td> <td>"+val.email+"</td> <td>"+val.password+"</td> </tr>"
         );
       });
@@ -126,4 +141,3 @@ function deleteCustomer(){
 }
 
 }
-});

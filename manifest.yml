@@ -1,6 +1,6 @@
 applications:
-- name: libraryui-flora
-  host: libraryui-flora
+- name: libraryui-flora2
+  host: libraryui-flora2
   env:
     LIBRARY_URI: "https://libraryflora.eu-gb.mybluemix.net/api"
   memory: 64M

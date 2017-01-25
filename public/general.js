@@ -1,35 +1,31 @@
-$(document).ready(function() {
-	$('#homeLink').click(function() {
-    $('#bookdiv').hide();
-    $('#customerDiv').hide();
-    $('#rentalsDiv').hide();
-    $('#homeDiv').show();
-	});
-})
+/*$('#bookdiv a').click(function(e) {
+  e.preventDefault();
+  $(this).tab('show');
+});
 
-$(document).ready(function() {
-	$('#custlink').click(function() {
-    $('#bookdiv').hide();
-    $('#customerDiv').show();
-    $('#rentalsDiv').hide();
-    $('#homeDiv').hide();
-	});
-})
+$('#customerDivdiv a').click(function(e) {
+  e.preventDefault();
+  $(this).tab('show');
+});
 
-$(document).ready(function() {
-	$('#bookLink').click(function() {
-    $('#bookdiv').show();
-    $('#customerDiv').hide();
-    $('#rentalsDiv').hide();
-    $('#homeDiv').hide();
-	});
-})
+// store the currently selected tab in the hash value
+$("#bookLink").on("shown.bs.tab", function(e) {
+  var id = $(e.target).attr("href").substr(1);
+  window.location.hash = id;
+});
+// on load of the page: switch to the currently selected tab
+//var hash = window.location.hash;
+//$('#bookdiv a[href="' + hash + '"]').tab('show');*/
 
-$(document).ready(function() {
-	$('#rentalsLink').click(function() {
-    $('#bookdiv').hide();
-    $('#customerDiv').hide();
-    $('#rentalsDiv').show();
-    $('#homeDiv').hide();
-	});
-})
+/*$(document).ready(function() {
+    if (location.hash) {
+        $("a[href='" + location.hash + "']").tab("show");
+    }
+    $(document.body).on("click", "a[data-toggle]", function(event) {
+        location.hash = this.getAttribute("href");
+    });
+});
+$(window).on("popstate", function() {
+    var anchor = location.hash || $("a[data-toggle='tab']").first().attr("href");
+    $("a[href='" + anchor + "']").tab("show");
+});*/

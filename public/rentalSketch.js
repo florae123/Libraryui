@@ -1,20 +1,35 @@
-$.ajax({
-	type: 'GET',
-	url: myurl,
-	dataType: 'json', // data type of response
-	success: function(data){
-	rootURL1 = data.uri;
-var rootURLrental = rootURL1 + "/rentals";
-console.log(rootURL1);
-console.log(rootURLrental);
 
+if(protocol=="file:" || protocol=='http:'){
+	console.log("You are in the local files.");
+	var rootURL1 = 'http://localhost:9080/JavaRESTAPI/api';
+	executeRental();
+} else {
+	var myurl = protocol + '//' + myurl + "/apiuri";
+	console.log('The rootURL1 is found at: '+myurl);
+		$.ajax({
+			type: 'GET',
+			url: myurl,
+			dataType: 'json', // data type of response
+			success: function(data){
+				rootURL1 = data.uri;
+				console.log('The rootURL1 is: '+rootURL1);
+				executeRental();
+			}
+		});
+}
+
+function executeRental(){
+
+  var rootURLrental = rootURL1 + "/rentals";
+  console.log(rootURL1);
+  console.log(rootURLrental);
 
 $(document).ready(function() {
     $.ajax({
         url: rootURLrental
     }).then(function(data) {
       $.each( data, function( key, val ) {
-        $('.rentalsTable').append(
+        $('#rentalsTableRows').append(
           "<tr> <td>"+val.id+"</td> <td>"+val.bookuri+"</td> <td>"+val.customeruri+"</td> <td>"+val.start+"</td> <td>"+val.end+"</td> </tr>"
         );
       });
@@ -119,5 +134,3 @@ function formToJSONRental() {
 }
 
 }
-
-});

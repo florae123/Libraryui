@@ -1,5 +1,5 @@
-if(protocol=="file:"){
-	console.log("You are in the lokal files.");
+if(protocol=="file:" || protocol=='http:'){
+	console.log("You are in the local files.");
 	var rootURL1 = 'http://localhost:9080/JavaRESTAPI/api';
 	execute();
 } else {
@@ -47,7 +47,7 @@ $(document).ready(function() {
     }).then(function(data) {
       $.each( data, function( key, val ) {
       //do something with data
-        $('.bookTable').append(
+        $('#bookTableRows').append(
           "<tr> <td>"+val.id+"</td> <td>"+val.title+"</td> <td>"+val.author+"</td> <td>"+val.isbn+"</td> </tr>"
         );
       });
@@ -66,7 +66,7 @@ function deleteBook(){
 		type: 'DELETE',
 		url: rootURLbooks + '/' + $('#deleteId').val(),
 		success: function(data, textStatus, jqXHR){
-			location.reload();
+			//location.reload( showBooksOnly());
 		},
 		error: function(jqXHR, textStatus, errorThrown){
 			alert('delete Book error: ' + textStatus);
@@ -87,6 +87,9 @@ function deleteAll(){
 		url: rootURLbooks,
 		success: function(data, textStatur, jqXHR){
 			location.reload();
+			$(document).ready(function() {
+				//showBooksOnly();
+			});
 		},
 		error: function(jqXHR, textStatus, errorThrown){
 			alert('delete all books error: '+ textStatus);
@@ -104,6 +107,9 @@ function updateBook(){
 		data: formToJSONBook(),
 		success: function(data, textStatus, jqXHR){
 			location.reload();
+			$(document).ready(function() {
+				//showBooksOnly();
+			});
 		},
 		error: function(jqXHR, textStatus, errorThrown){
 			alert('update Book error: '+ textStatus);
@@ -121,6 +127,9 @@ function addBook() {
 		data: formToJSONBook(),
 		success: function(data, textStatus, jqXHR){
 			location.reload();
+			$(document).ready(function() {
+				//showBooksOnly();
+			});
 		},
 		error: function(jqXHR, textStatus, errorThrown){
 			alert('add Book error: ' + textStatus);
@@ -153,7 +162,7 @@ function renderList(data) {
 	// JAX-RS serializes an empty list as null, and a 'collection of one' as an object (not an 'array of one')
 	var list = data == null ? [] : (data instanceof Array ? data : [data]);
 	$.each(list, function(index, value) {
-		$('#bookTable').append("<tr> <td>"+value.id+"</td> <td>"+value.title+"</td> <td>"+value.author+"</td> <td>"+value.isbn+"</td> </tr>");
+		$('#bookTableRows').append("<tr> <td>"+value.id+"</td> <td>"+value.title+"</td> <td>"+value.author+"</td> <td>"+value.isbn+"</td> </tr>");
 	});
 }
 
