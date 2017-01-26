@@ -1,7 +1,7 @@
 
 if(protocol=="file:" || protocol=='http:'){
 	console.log("You are in the local files.");
-	var rootURL1 = 'http://localhost:9080/JavaRESTAPI/api';
+	var rootURL1 = 'http://localhost:9080/myOtherTest/api';
 	executeRental();
 } else {
 	var myurl = protocol + '//' + myurl + "/apiuri";
