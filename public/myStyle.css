@@ -1,0 +1,68 @@
+/*colors: 1:#376151 2:#B7E6D4 3:#7FE0BD 4:#166146 5:#54957D #D6E6E1 */
+h1 {
+  color: #166146;
+}
+#convText {
+  font-style: italic;
+}
+.deleteDescription {
+  display: none;
+  position: absolute;
+}
+.popover{
+    max-width: 100%;
+}
+.popoverContent {
+  padding: 20px;
+  background-color: #B7E6D4;
+}
+.popover-content {
+  overflow: auto;
+}
+.btn.btn-default {
+  background-color: #376151;
+  color: white;
+  border: none;
+}
+.panel-body {
+  background-color: #B7E6D4;
+  overflow: auto;
+}
+.panel-body.bigpopover {
+  overflow: visible !important;
+}
+.panel-footer {
+  background-color: #54957D;
+}
+.toggleHeader.panel-heading {
+  background-color: #54957D;
+  color: white;
+  cursor: pointer;
+}
+table {
+  overflow: auto;
+}
+.table td{
+  border-bottom: #54957D solid 1px !important;
+}
+.table th{
+  border-bottom: #54957D solid 2px !important;
+}
+/*navbar*/
+.navbar-custom {
+  background-color: #376151;
+  border-color: #166146;
+}
+.navbar-custom .navbar-nav > li > a {
+    color: #B7E6D4;
+    /*#E6FFEF;
+    #E8FAEF;*/
+}
+.navbar-custom .navbar-nav > .active > a/*, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus*/ {
+    color: #376151;
+    background-color: #B7E6D4;
+}
+.navbar-custom .navbar-nav > li > a:hover {
+  color: #376151;
+  background-color: #B7E6D4;
+}/*navbar end*/

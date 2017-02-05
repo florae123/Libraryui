@@ -1,0 +1,359 @@
+var protocol = window.location.protocol;
+if(protocol=="file:" || protocol=='http:'){
+	console.log("You are in the local files.");
+	var rootURL1 = 'http://localhost:9080/myOtherTest/api';
+	execute();
+} else {
+	var myurl = window.location.host;
+	console.log("location.host: " +myurl);
+	var protocol = window.location.protocol;
+	console.log("location.protocol: " +protocol);
+	myurl = protocol + '//' + myurl + "/apiuri";
+	console.log('The rootURL1 is found at: '+myurl);
+		$.ajax({
+			type: 'GET',
+			url: myurl,
+			dataType: 'json', // data type of response
+			success: function(data){
+				rootURL1 = data.uri;
+				console.log('The rootURL1 is: '+rootURL1);
+				execute();
+			}
+		});
+}
+
+
+function execute(){
+
+var rootURLbooks = rootURL1 + "/books";
+console.log(rootURL1);
+console.log(rootURLbooks);
+
+$(document).ready(function() {
+	$('#addNewBook').click(function() {
+		addBook();
+	});
+})
+
+$(document).ready(function() {
+	$('#updateBook').click(function() {
+		updateBook();
+	});
+})
+
+//load table content
+$(document).ready(function(){
+	showBooks();
+})
+
+//table content
+function showBooks(){
+	$('#bookTableRows').empty();
+	$.ajax({
+			url: rootURLbooks
+	}).then(function(data) {
+		$.each( data, function( key, val ) {
+		//do something with data
+			var auth = "No authors found.";
+			if(val.hasOwnProperty('authors')){
+				auth = val.authors;
+				if(val.authors.length === 0)	auth = "No authors found";
+			}
+			$('#bookTableRows').append(
+				'<tr> <td>'+val.id+'</td> <td>'+val.title+'</td> <td>'+auth+'</td> <td>'+val.isbn+'</td>'+
+				'<td> <a class="btn btn-default cover" data-toggle="popover" data-placement="left">'+
+				'<span class="glyphicon glyphicon-book"></span> </a>'+
+				'&nbsp;<a class="btn btn-default tags" data-toggle="popover" data-placement="left">'+
+				'<span class="glyphicon glyphicon-tags"></span></a>'+
+				'&nbsp;<a class="btn btn-default removeBook" data-toggle="popover" data-placement="left" >'+
+				'<span class="glyphicon glyphicon-remove">'+
+				'</span></a>'+
+				'&nbsp;<a class="btn btn-default updateBook" data-toggle="popover" data-placement="left">'+
+				'<span class="glyphicon glyphicon-pencil"></span></a></td>'+
+				'</tr>'
+			);
+			$('[class="btn btn-default tags"]').popover({
+				html: true,
+				trigger: 'hover click',
+				content: function () {
+					return showTags(val);
+				}
+			});
+			$('[class="btn btn-default cover"]').popover({
+				html: true,
+				trigger: 'hover click',
+				content: function() {
+					return showCover(val);
+				}
+			});
+			$('[class="btn btn-default removeBook"]').popover({
+				html: true,
+				trigger: 'click',
+				content: function () {
+					return '<div class="popoverContent"><p>Delete this book?</p>'+
+					'<p></p><p><div>'+
+					'<button type="button" class="btn btn-default deleteCheckBook">'+
+					'<span class="glyphicon glyphicon-ok"></button>'+
+					'&nbsp; <button type="button" class="btn btn-default deleteNotBook">'+
+					'Cancel</button></div></p></div>';
+				}
+			});
+			//<div class="deleteDescription">Delete</div>
+			$(".btn.btn-default.removeBook").mouseover(function() {
+					//$(".deleteDescription").show();
+			}).mouseout(function() {
+					$(".deleteDescription").hide();
+			});
+			$('[class="btn btn-default updateBook"]').popover({
+				html: true,
+				trigger: 'click',
+				content: function () {
+					return '<div class="popoverContent">'+
+					'<div class="col-sm-offset-2"><strong>Update Book:</strong></div>'+
+					'<form class="form-horizontal">'+
+						'<div class="form-group">'+
+							'<label class="control-label" for="titleUpdate">Title:</label>'+
+							'<input type="text" class="form-control rentalInput" id="titleUpdate" placeholder="Enter Title">'+
+						'</div>'+
+						'<div class="form-group">'+
+							'<label class="control-label" for="authorsUpdate">Customer ID:</label>'+
+							'<input type="text" class="form-control rentalInput" id="authorsUpdate" placeholder="Enter Authors">'+
+						'</div>'+
+						'<div class="form-group">'+
+							'<label class="control-label" for="isbnUpdate">Start Date:</label>'+
+							'<input type="text" class="form-control rentalInput" id="isbnUpdate" placeholder="Enter ISBN">'+
+						'</div>'+
+						'<div class="form-group">'+
+							'<button type="button" class="btn btn-default" id="updateBookbtn">update</button>'+
+						'</div>'+
+					'</form>'+
+					'</div>';
+				}
+			});
+		});
+	});
+}
+
+$(document).on("click", ".deleteNotBook", function (e) {
+	var elem, evt = e ? e:event;
+	if (evt.srcElement)  elem = evt.srcElement;
+	else if (evt.target) elem = evt.target;
+
+	var parent = elem.parentElement;
+	while(!(parent.tagName=='TD')) {
+		parent = parent.parentElement;
+	}
+	var butt = $(parent).find("a:nth-child(3)")[0];
+	$(butt).trigger('click');
+})
+
+$(document).on("click", ".deleteCheckBook", function (e) {
+	var elem, evt = e ? e:event;
+	if (evt.srcElement)  elem = evt.srcElement;
+	else if (evt.target) elem = evt.target;
+
+	var parent = elem.parentElement;
+	while(!(parent.tagName=='TR')) {
+		parent = parent.parentElement;
+	}
+	var id = $(parent).find("td:nth-child(1)"); //gets first td of row
+	var id = id[0].innerHTML;	//id of rental
+	deleteBook(id, elem, parent);
+})
+
+function showTags(data) {
+	if(data.hasOwnProperty('tags') && !jQuery.isEmptyObject(data.tags)){
+		var tags = data.tags;
+		var text = "";
+		var i;
+		for (i = 0; i < tags.length; i++) {
+			text += tags[i] + "<br>";
+		}
+		return text;
+	} else {
+		return "No tags found."
+	}
+}
+
+function showCover(data) {
+	if((!data.hasOwnProperty('picture') || data.picture == "No Cover found") ) {
+		return "No cover found.";
+	} else {
+		return '<img src="'+data.picture + '" style="width:240px" />';
+	}
+}
+
+$(document).on("click", "#updateBookbtn", function (e) {
+	var elem, evt = e ? e:event;
+	if (evt.srcElement)  elem = evt.srcElement;
+	else if (evt.target) elem = evt.target;
+
+	var parent = elem.parentElement;
+	while(!(parent.tagName=='TR')) {
+		parent = parent.parentElement;
+	}
+	var id = $(parent).find("td:nth-child(1)"); //gets first td of row
+	var id = id[0].innerHTML;	//id of rental
+	updateBook(id, elem);
+})
+
+function updateBook(valueID, element){
+	console.log('updateBook');
+	$.ajax({
+		type:'PUT',
+		contentType: 'application/json',
+		url: rootURLbooks +'/' + valueID,
+		dataType: "json",
+		data: formToJSONBookUpdate(valueID),
+		success: function(data, textStatus, jqXHR){
+				//close popover
+				var parent1 = element.parentElement;
+				while(!(parent1.tagName=='TD')) {
+					parent1 = parent1.parentElement;
+				}
+				$(parent1).trigger('click');
+				showBooks();
+				$.bootstrapGrowl("The book "+valueID+" has been updated.", {type:'success', delay: 2000});
+		},
+		error: function(jqXHR, textStatus, errorThrown){
+			alert('update Book error: '+ textStatus);
+		}
+	})
+}
+
+
+
+/*$(document).ready(function() {
+	$('#deleteButton').click(function() {
+		deleteBook();
+	});
+})*/
+
+function deleteBook(valueID, element, parent){
+	console.log('deleteBook');
+	console.log(element.tagName),
+	$.ajax({
+		type: 'DELETE',
+		url: rootURLbooks + '/' + valueID,
+		success: function(data, textStatus, jqXHR){
+			//close popover
+			var parent1 = element.parentElement;
+			while(!(parent1.tagName=='TD')) {
+				parent1 = parent1.parentElement;
+			}
+			var butt = $(parent1).find("a:nth-child(3)")[0];
+			$(butt).trigger('click');
+			$(parent).fadeOut(400);
+			$.bootstrapGrowl("The book "+valueID+" has been deleted.", {type:'success', delay: 2000});
+		},
+		error: function(jqXHR, textStatus, errorThrown){
+			alert('delete Book error: ' + textStatus);
+		}
+	});
+}
+
+
+$(document).ready(function(){
+	$('#deleteAllBooksbtn').popover({
+		html: true,
+		trigger: 'click',
+		container: 'body',
+		content: function () {
+			return '<div class="popoverContent">'+
+			'<p>Are you sure you want to delete all registered books?</p>'+
+			'<p></p><p><div class="col-sm-offset-3">'+
+			'<button type="button" class="btn btn-default removeAllBooks">'+
+			'<span class="glyphicon glyphicon-ok"></button>'+
+			'&nbsp; <button type="button" class="btn btn-default removeBooksNot">'+
+			'<span class="glyphicon glyphicon-remove"></button></div></p></div>';
+		}
+	});
+})
+
+$(document).on("click", ".removeBooksNot", function (e) {
+	var butt = document.getElementById('deleteAllBooksbtn');
+	$(butt).trigger('click');
+})
+
+$(document).on("click", ".removeAllBooks", function (e) {
+	deleteAllBooks();
+})
+
+function deleteAllBooks(){
+	console.log('deleteAll');
+	$.ajax({
+		type: 'DELETE',
+		url: rootURLbooks,
+		success: function(data, textStatur, jqXHR){
+			location.reload();
+			$(document).ready(function() {
+				showBooks();
+				$.bootstrapGrowl("All books have been deleted.", {type:'success', delay: 2000});
+				var butt = document.getElementById('deleteAllBooksbtn');
+				$(butt).trigger('click');
+			});
+		},
+		error: function(jqXHR, textStatus, errorThrown){
+			alert('delete all books error: '+ textStatus);
+		}
+	})
+}
+
+/*function updateBook(){
+	console.log('updateBook');
+	$.ajax({
+		type:'PUT',
+		contentType: 'application/json',
+		url: rootURLbooks +'/' + $('#id').val(),
+		dataType: "json",
+		data: formToJSONBook(),
+		success: function(data, textStatus, jqXHR){
+			location.reload();
+			$(document).ready(function() {
+				//showBooksOnly();
+			});
+		},
+		error: function(jqXHR, textStatus, errorThrown){
+			alert('update Book error: '+ textStatus);
+		}
+	})
+}*/
+
+function addBook() {
+	console.log('addBook');
+	$.ajax({
+		type: 'POST',
+		contentType: 'application/json',
+		url: rootURLbooks,
+		//dataType: "json",
+		data: formToJSONBook(),
+		success: function(data, textStatus, jqXHR){
+			$(document).ready(function() {
+				showBooks();
+				$('.bookInput').val('');
+				$.bootstrapGrowl("The book has been registered.", {type:'success', delay: 2000});
+			});
+		},
+		error: function(jqXHR, textStatus, errorThrown){
+			alert('add Book error: ' + textStatus);
+		}
+	});
+}
+
+// Helper function to serialize all the form fields into a JSON string
+function formToJSONBook() {
+	var jsonbook = {"title": $('#title').val(),"isbn": $('#isbn').val(),"authors": []};
+	var authorsinput = $('#authors').val();
+	jsonbook.authors.push(authorsinput);
+	return JSON.stringify(jsonbook);
+}
+function formToJSONBookUpdate(valueID) {
+	var jsonbook = {"id": valueID,"title": $('#titleUpdate').val(),"isbn": $('#isbnUpdate').val(),"authors": []};
+	var authorsinput = $('#authorsUpdate').val();
+	jsonbook.authors.push(authorsinput);
+	return JSON.stringify(jsonbook);
+}
+
+
+
+}

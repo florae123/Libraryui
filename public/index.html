@@ -3,26 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <!--<link rel="stylesheetMyOwnCss" href="style2.css">-->
-  <!-- <script src="http://code.jquery.com/jquery-1.7.min.js"></script> -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-  <script src="jquery-3.1.1.min.js"></script>
+  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+  <script src="js/jquery-3.1.1.min.js"></script>
+  <script src="js/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+  <link rel="stylesheet" href="js/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="myStyle.css">
+  <script src="js/jquery.bootstrap-growl.min.js"></script>
   <script>
     var rootURL1;
-    //$(document).ready(function() {
-    var myurl = window.location.host;
-    console.log("location.host: " +myurl);
-    var protocol = window.location.protocol;
-    console.log("location.protocol: " +protocol);
-    //});
   </script>
-  <script src="booksketch.js"></script>
-  <script src="customerSketch.js"></script>
-  <script src="rentalSketch.js"></script>
-  <script src="general.js"></script>
+  <script src="js/booksketch.js"></script>
+  <script src="js/customerSketch.js"></script>
+  <script src="js/rentalSketch.js"></script>
+  <script src="js/general.js"></script>
+  <script src="js/conversation.js"></script>
 
 </head>
 <body>
@@ -34,7 +28,7 @@
 </div>
 
 <div class="container-fluid">
-  <nav class="navbar navbar-inverse">
+  <nav class="navbar navbar-custom">
     <ul class="nav navbar-nav">
       <li><a data-toggle="tab" href="#home" id="homeLink">Home</a></li>
       <li><a data-toggle="tab" href="#bookdiv" id="bookLink">Books</a></li>
@@ -45,260 +39,320 @@
 </div>
 
 <div class="container-fluid">
-<div class="tab-content">
-
-  <div class="tab-pane fade" id="home"></div>
-
-  <div class="tab-pane fade" id="bookdiv">
-
-    <h2>Registered Books</h2>
-
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Title</th>
-          <th>Author</th>
-          <th>ISBN</th>
-        </tr>
-      </thead>
-      <tbody id="bookTableRows">
-      </tbody>
-    </table>
-
-    <h2>Add a book</h2>
-
-    <form class="form-horizontal">
-      <div class="form-group">
-        <label class="control-label col-sm-2" for="id">ID:</label>
-        <div class="col-sm-5">
-          <input type="text" class="form-control" id="id" placeholder="Enter ID">
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="panel panel-default">
+        <div a data-toggle="collapse" href="#collapseChat" id="chatToggle" class="toggleHeader panel-heading" >
+          <h2>Chat</h2>
         </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-sm-2" for="title">Title:</label>
-        <div class="col-sm-5">
-          <input type="text" class="form-control" id="title" placeholder="Enter Title">
-          </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-sm-2" for="author">Author:</label>
-        <div class="col-sm-5">
-          <input type="text" class="form-control" id="author" placeholder="Enter Author">
-          </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-sm-2" for="isbn">ISBN:</label>
-        <div class="col-sm-5">
-          <input type="text" class="form-control" id="isbn" placeholder="Enter ISBN">
-          </div>
-      </div>
-      <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-2">
-            <button type="button" class="btn btn-default" id="addNewBook">add Book</button>
-          </div>
-          <div class="col-sm-1">
-            <button type="button" class="btn btn-default" id="updateBook">update Book</button>
-          </div>
-      </div>
-    </form>
-
-
-    <h2>Delete a book</h2>
-
-    <form class="form-horizontal">
-      <div class="form-group">
-        <label class="control-label col-sm-2" for="deleteId">ID:</label>
-        <div class="col-sm-5">
-          <input type="text" class="form-control" id="deleteId" placeholder="Enter ID">
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-2">
-          <button type="button" class="btn btn-default" id="deleteButton">Delete</button>
-        </div>
-      </div>
-    </form>
-
-
-    <h2>Delete all books</h2>
-    <form class="form-horizontal">
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-2">
-          <button type="button" class="btn btn-default" id="deleteAllbtn">Delete all</button>
-        </div>
-      </div>
-    </form>
-
-  </div>
-  <div class="tab-pane fade" id="customerDiv">
-    <h2>Registered Customers</h2>
-
-
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Password</th>
-        </tr>
-      </thead>
-      <tbody id="customerTableRows">
-      </tbody>
-    </table>
-
-    <h2>Add a customer</h2>
-      <form class="form-horizontal">
-        <div class="form-group">
-          <label class="control-label col-sm-2" for="cId">ID:</label>
-          <div class="col-sm-5">
-            <input type="text" class="form-control" id="cId" placeholder="Enter ID">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="control-label col-sm-2" for="cName">Name:</label>
-          <div class="col-sm-5">
-            <input type="text" class="form-control" id="cName" placeholder="Enter Name">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="control-label col-sm-2" for="cEmail">Email:</label>
-          <div class="col-sm-5">
-            <input type="text" class="form-control" id="cEmail" placeholder="Enter Email">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="control-label col-sm-2" for="cPassword">Password:</label>
-          <div class="col-sm-5">
-            <input type="text" class="form-control" id="cPassword" placeholder="Enter Password">
-          </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-2">
-              <button type="button" class="btn btn-default" id="addNewCustomer">add Customer</button>
+        <div id="collapseChat" class="panel-collapse collapse">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-sm-offset-7">
+                <button type="button" class="btn btn-default" id="convStart">Start Conversation</button>
+              </div>
             </div>
-            <div class="col-sm-1">
-              <button type="button" class="btn btn-default" id="updateCustomer">update Customer</button>
+            <div id="convText">
             </div>
-        </div>
-    </form>
-
-
-    <h2>Delete a customer</h2>
-
-    <form class="form-horizontal">
-      <div class="form-group">
-        <label class="control-label col-sm-2" for="deleteCustId">ID:</label>
-        <div class="col-sm-5">
-          <input type="text" class="form-control" id="deleteCustId" placeholder="Enter ID">
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-2">
-          <button type="button" class="btn btn-default" id="deleteBtnC">Delete</button>
-        </div>
-      </div>
-    </form>
-
-
-    <h2>Delete all customers</h2>
-    <form class="form-horizontal">
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-2">
-          <button type="button" class="btn btn-default" id="deleteAllCustomersbtn">Delete all</button>
+          </div>
+          <div class="panel-footer">
+            <div class="row">
+              <div class="form-group">
+                <div class="col-sm-10">
+                  <textarea class="form-control" rows="2" id="convUserText" placeholder="Enter Answer"></textarea>
+                </div>
+                <div class="col-sm-offset-10">
+                    <button type="button" class="btn btn-default" id="convSubmit">
+                      <span class="glyphicon glyphicon-comment"></span>
+                    </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </form>
+    </div>
+
+    <div class="col-sm-9">
+    <div class="tab-content">
+
+      <div class="tab-pane fade" id="home"></div>
+
+      <div class="tab-pane fade" id="bookdiv">
+
+        <div class="panel panel-default">
+          <div a href="#bookAddToggle" data-toggle="collapse" class="toggleHeader panel-heading">
+            <h2>Add a book</h2>
+          </div>
+          <div class="collapse" id="bookAddToggle">
+            <div class="panel-body">
+              <form class="form-horizontal">
+                <!--<div class="form-group">
+                  <label class="control-label col-sm-2" for="id">ID:</label>
+                  <div class="col-sm-5">
+                    <input type="text" class="form-control bookInput" id="id" placeholder="Enter ID">
+                  </div>
+                </div>-->
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="title">Title:</label>
+                  <div class="col-sm-5">
+                    <input type="text" class="form-control bookInput" id="title" placeholder="Enter Title">
+                    </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="authors">Authors:</label>
+                  <div class="col-sm-5">
+                    <input type="text" class="form-control bookInput" id="authors" placeholder="Enter Author">
+                    </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="isbn">ISBN:</label>
+                  <div class="col-sm-5">
+                    <input type="text" class="form-control bookInput" id="isbn" placeholder="Enter ISBN">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-2">
+                      <button type="button" class="btn btn-default" id="addNewBook">add Book</button>
+                    </div>
+                    <!--<div class="col-sm-1">
+                      <button type="button" class="btn btn-default" id="updateBook">update Book</button>
+                    </div>-->
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel panel-default">
+          <div a href="#bookTableToggle" data-toggle="collapse" id="toggleHeaderBookTable" class="toggleHeader panel-heading">
+            <h2>Registered books</h2>
+          </div>
+
+          <div class="collapse" id="bookTableToggle">
+            <div class="panel-body">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Authors</th>
+                    <th>ISBN</th>
+                    <th>More</th>
+                  </tr>
+                </thead>
+                <tbody id="bookTableRows">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="panel panel-default">
+          <div a href="#BooksRemoveToggle" data-toggle="collapse" class="toggleHeader panel-heading">
+            <h2>Delete all books</h2>
+          </div>
+          <div class="collapse" id="BooksRemoveToggle">
+            <div class="panel-body bigpopover">
+              <form class="form-horizontal">
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-2">
+                    <button type="button" class="btn btn-default" data-toggle="popover" id="deleteAllBooksbtn">Delete all</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="tab-pane fade" id="customerDiv">
+
+        <div class="panel panel-default">
+          <div a href="#custAddToggle" data-toggle="collapse" class="toggleHeader panel-heading">
+            <h2>Add a customer</h2>
+          </div>
+          <div class="collapse" id="custAddToggle">
+            <div class="panel-body">
+              <form class="form-horizontal">
+                <!--<div class="form-group">
+                  <label class="control-label col-sm-2" for="cId">ID:</label>
+                  <div class="col-sm-5">
+                    <input type="text" class="form-control custInput" id="cId" placeholder="Enter ID">
+                  </div>
+                </div>-->
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="cName">Name:</label>
+                  <div class="col-sm-5">
+                    <input type="text" class="form-control custInput" id="cName" placeholder="Enter Name">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="cEmail">Email:</label>
+                  <div class="col-sm-5">
+                    <input type="text" class="form-control custInput" id="cEmail" placeholder="Enter Email">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="cPassword">Password:</label>
+                  <div class="col-sm-5">
+                    <input type="text" class="form-control custInput" id="cPassword" placeholder="Enter Password">
+                  </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-2">
+                      <button type="button" class="btn btn-default" id="addNewCustomer">add Customer</button>
+                    </div>
+                    <!--<div class="col-sm-1">
+                      <button type="button" class="btn btn-default" id="updateCustomer">update Customer</button>
+                    </div>-->
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel panel-default">
+          <div a href="#custTableToggle" data-toggle="collapse" class="toggleHeader panel-heading">
+            <h2>Registered customers</h2>
+          </div>
+          <div class="collapse" id="custTableToggle">
+            <div class="panel-body">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="customerTableRows">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel panel-default">
+          <div a href="#CustomersRemoveToggle" data-toggle="collapse" class="toggleHeader panel-heading">
+            <h2>Delete all customers</h2>
+          </div>
+          <div class="collapse" id="CustomersRemoveToggle">
+            <div class="panel-body bigpopover">
+              <form class="form-horizontal">
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-2">
+                    <button type="button" class="btn btn-default" data-toggle="popover" id="deleteAllCustomersbtn">Delete all</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="tab-pane fade" id="rentalsDiv">
+
+        <div class="panel panel-default">
+          <div a href="#RentalAddToggle" data-toggle="collapse" class="toggleHeader panel-heading">
+            <h2>Borrow a book</h2>
+          </div>
+          <div class="collapse" id="RentalAddToggle">
+            <div class="panel-body">
+              <form class="form-horizontal">
+                <!--<div class="form-group">
+                  <label class="control-label col-sm-2" for="rentalId">ID:</label>
+                  <div class="col-sm-5">
+                    <input type="text" class="form-control rentalInput" id="rentalId" placeholder="Enter ID">
+                  </div>
+                </div>-->
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="rentalbookid">Book ID:</label>
+                  <div class="col-sm-5">
+                    <input type="text" class="form-control rentalInput" id="rentalbookid" placeholder="Enter Book ID">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="rentalcustomerid">Customer ID:</label>
+                  <div class="col-sm-5">
+                    <input type="text" class="form-control rentalInput" id="rentalcustomerid" placeholder="Enter Customer ID">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="start">Start Date:</label>
+                  <div class="col-sm-5">
+                    <input type="text" class="form-control rentalInput" id="start" placeholder="Enter Start Date as YYYY-MM-DD">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="end">End Date:</label>
+                  <div class="col-sm-5">
+                    <input type="text" class="form-control rentalInput" id="end" placeholder="Enter End Date as YYYY-MM-DD">
+                  </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-2">
+                      <button type="button" class="btn btn-default" id="addNewrental">borrow book</button>
+                    </div>
+                    <!--<div class="col-sm-1">
+                      <button type="button" class="btn btn-default" id="updateRental">update</button>
+                    </div>-->
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="panel panel-default">
+          <div a href="#RentalTableToggle" data-toggle="collapse" class="toggleHeader panel-heading">
+            <h2>Registered borrowed Books</h2>
+          </div>
+          <div class="collapse" id="RentalTableToggle">
+            <div class="panel-body">
+              <table class="table table-hover" data-unique-id="rentalUniqueId">
+                <thead>
+                  <tr>
+                    <th data-field="rentalUniqueId">ID</th>
+                    <th data-field="bookid">Book</th>
+                    <th data-field="customerid">Customer</th>
+                    <th data-field="start">Start</th>
+                    <th data-field="end">End</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="rentalsTableRows">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel panel-default">
+          <div a href="#RentalsRemoveToggle" data-toggle="collapse" class="toggleHeader panel-heading">
+            <h2>Return all books</h2>
+          </div>
+          <div class="collapse" id="RentalsRemoveToggle">
+            <div class="panel-body bigpopover">
+              <form class="form-horizontal">
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-2">
+                    <button type="button" class="btn btn-default" data-toggle="popover" id="deleteAllRentalsbtn">Return all</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
 
   </div>
-
-  <div class="tab-pane fade" id="rentalsDiv">
-    <h2>Registered borrowed Books</h2>
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Book</th>
-          <th>Customer</th>
-          <th>Start</th>
-          <th>End</th>
-        </tr>
-      </thead>
-      <tbody id="rentalsTableRows">
-      </tbody>
-    </table>
-
-    <h2>Borrow a book</h2>
-
-    <form class="form-horizontal">
-      <div class="form-group">
-        <label class="control-label col-sm-2" for="rentalId">ID:</label>
-        <div class="col-sm-5">
-          <input type="text" class="form-control" id="rentalId" placeholder="Enter ID">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-sm-2" for="rentalbookid">Book ID:</label>
-        <div class="col-sm-5">
-          <input type="text" class="form-control" id="rentalbookidId" placeholder="Enter Book ID">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-sm-2" for="rentalcustomerid">Customer ID:</label>
-        <div class="col-sm-5">
-          <input type="text" class="form-control" id="rentalcustomeridId" placeholder="Enter Customer ID">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-sm-2" for="start">Start Date:</label>
-        <div class="col-sm-5">
-          <input type="text" class="form-control" id="start" placeholder="Enter Start Date">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-sm-2" for="end">End Date:</label>
-        <div class="col-sm-5">
-          <input type="text" class="form-control" id="end" placeholder="Enter End Date">
-        </div>
-      </div>
-      <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-2">
-            <button type="button" class="btn btn-default" id="addNewrental">borrow book</button>
-          </div>
-          <div class="col-sm-1">
-            <button type="button" class="btn btn-default" id="updateRental">update</button>
-          </div>
-      </div>
-    </form>
-
-    <h2>Return a book</h2>
-
-    <form class="form-horizontal">
-      <div class="form-group">
-        <label class="control-label col-sm-2" for="deleteRentalId">ID:</label>
-        <div class="col-sm-5">
-          <input type="text" class="form-control" id="deleteRentalId" placeholder="Enter ID">
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-2">
-          <button type="button" class="btn btn-default" id="deleteRentalBtn">Return</button>
-        </div>
-      </div>
-    </form>
-
-    <h2>Return all books</h2>
-    <form class="form-horizontal">
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-2">
-          <button type="button" class="btn btn-default" id="deleteAllRentalsbtn">Return all</button>
-        </div>
-      </div>
-    </form>
-
   </div>
-
 </div>
 </div>
 
