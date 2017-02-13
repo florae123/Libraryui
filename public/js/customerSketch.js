@@ -51,9 +51,6 @@ function showCustomers() {
 				'<span class="glyphicon glyphicon-pencil"></span></a></td>'+
 				' </tr>'
 			);
-			$('#selCid').append(
-				'<option>'+val.id+'</option>'
-			);
 			$('[class="btn btn-default deleteCust"]').popover({
 				html: true,
 				trigger: 'click',

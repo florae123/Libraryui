@@ -95,11 +95,56 @@ function showRentals() {
 	});
 }
 
-function dothis(){
-
+function showSelection(customerSel, bookSel) {
+	$(customerSel).innerHTML = "";
+	$(bookSel).innerHTML = "";
+	$('.customerTable tr').each(function (i, row) {
+		if(i!=0){
+			var $row = $(row);
+			var $tempCId = $row[0].children[0].innerHTML;
+			$(customerSel).append(
+				'<option>'+$tempCId+'</option>'
+			);
+		}
+	});
+	$('.bookTable tr').each(function (i, row) {
+		if(i!=0){
+			var $row = $(row);
+			var $tempBId = $row[0].children[0].innerHTML;
+			$(bookSel).append(
+				'<option>'+$tempBId+'</option>'
+			);
+		}
+	});
 }
 
+$(document).on("click", ".addRentalToggle", function(e) {
+	//showSelection('#selCid', '#selBid');
+	$('#selCid').empty();
+	$('#selBid').empty();
+	$('.customerTable tr').each(function (i, row) {
+		if(i!=0){
+			var $row = $(row);
+			var $tempCId = $row[0].children[0].innerHTML;
+			$('#selCid').append(
+				'<option>'+$tempCId+'</option>'
+			);
+		}
+	});
+	$('.bookTable tr').each(function (i, row) {
+		if(i!=0){
+			var $row = $(row);
+			var $tempBId = $row[0].children[0].innerHTML;
+			$('#selBid').append(
+				'<option>'+$tempBId+'</option>'
+			);
+		}
+	});
+})
+
 $(document).on("click", ".updateRental", function (e) {
+	$('#selCidUpdate').empty();
+	$('#selBidUpdate').empty();
 	$('.customerTable tr').each(function (i, row) {
 		if(i!=0){
 			var $row = $(row);

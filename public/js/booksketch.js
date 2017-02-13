@@ -87,12 +87,11 @@ function showBooks(){
 				'<span class="glyphicon glyphicon-pencil"></span></a>'+
 				'&nbsp;<a class="btn btn-default listenBook" data-placement="left">'+
 				'<span class="glyphicon glyphicon-volume-up"></span></a>'+
+				'<div class="pleaseHide">'+val.about_the_book+'</div>'+
 				'</td>'+
 				'</tr>'
 			);
-			$('#selBid').append(
-				'<option>'+val.id+'</option>'
-			);
+			$('.pleaseHide').hide();
 			$('[class="btn btn-default tags"]').popover({
 				html: true,
 				trigger: 'hover click',
@@ -167,8 +166,14 @@ $(document).on("click", ".listenBook", function (e) {
 	var title = parent.children[1].innerHTML;
 	var author = parent.children[2].innerHTML;
 	var isbn = parent.children[3].innerHTML;
-	console.log(title+' '+author+' '+isbn);
-	speechBook(title, author, isbn);
+	var about = parent.children[4].lastChild.innerHTML;
+	//console.log(about);
+	//console.log(title+' '+author+' '+isbn);
+	if(about=="undefined" || about=="") {
+		speechBook(title, author, isbn);
+	} else {
+		speechAboutBook(title, author, isbn, about);
+	}
 })
 
 $(document).on("click", ".deleteNotBook", function (e) {
@@ -260,9 +265,19 @@ function updateBook(valueID, element){
 
 function speechBook(title, author, isbn){
 		WatsonSpeech.TextToSpeech.synthesize({
-			text: 'The book '+title+' by '+author+' has ISBN '+isbn,
+			//text: 'The book '+title+' by '+author+' has ISBN '+isbn,
+			text: '<speak version="1.0">The book '+title+' by '+author+' has ISBN '+'<say-as interpret-as="digits">'+isbn+'</say-as></speak>',
+			voice: 'en-US_AllisonVoice',
 			token: token
 		});
+}
+
+function speechAboutBook(title, author, isbn, about) {
+	WatsonSpeech.TextToSpeech.synthesize({
+		text: '<speak version="1.0"><emphasis>About the book </emphasis> '+title+' by '+author+': '+about+'</speak>',
+		voice: 'en-US_AllisonVoice',
+		token: token
+	});
 }
 
 
