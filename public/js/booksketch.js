@@ -26,8 +26,23 @@ if(protocol=="file:" || protocol=='http:'){
 function execute(){
 
 var rootURLbooks = rootURL1 + "/books";
-console.log(rootURL1);
 console.log(rootURLbooks);
+var rootURLspeech = rootURL1 + '/text_to_speech';
+console.log(rootURLspeech);
+var token;
+
+$.ajax({
+	url: rootURLspeech,
+	type: 'GET',
+	dataType: 'json',
+	success: function(data){
+		token = data.token;
+		showBooks();
+	},
+	error: function(jqXHR, textStatus, errorThrown){
+		alert('audio error: '+ textStatus);
+	}
+});
 
 $(document).ready(function() {
 	$('#addNewBook').click(function() {
@@ -69,8 +84,14 @@ function showBooks(){
 				'<span class="glyphicon glyphicon-remove">'+
 				'</span></a>'+
 				'&nbsp;<a class="btn btn-default updateBook" data-toggle="popover" data-placement="left">'+
-				'<span class="glyphicon glyphicon-pencil"></span></a></td>'+
+				'<span class="glyphicon glyphicon-pencil"></span></a>'+
+				'&nbsp;<a class="btn btn-default listenBook" data-placement="left">'+
+				'<span class="glyphicon glyphicon-volume-up"></span></a>'+
+				'</td>'+
 				'</tr>'
+			);
+			$('#selBid').append(
+				'<option>'+val.id+'</option>'
 			);
 			$('[class="btn btn-default tags"]').popover({
 				html: true,
@@ -133,6 +154,22 @@ function showBooks(){
 		});
 	});
 }
+
+$(document).on("click", ".listenBook", function (e) {
+	var elem, evt = e ? e:event;
+	if (evt.srcElement)  elem = evt.srcElement;
+	else if (evt.target) elem = evt.target;
+
+	var parent = elem.parentElement;
+	while(!(parent.tagName=='TR')) {
+		parent = parent.parentElement;
+	}
+	var title = parent.children[1].innerHTML;
+	var author = parent.children[2].innerHTML;
+	var isbn = parent.children[3].innerHTML;
+	console.log(title+' '+author+' '+isbn);
+	speechBook(title, author, isbn);
+})
 
 $(document).on("click", ".deleteNotBook", function (e) {
 	var elem, evt = e ? e:event;
@@ -221,13 +258,13 @@ function updateBook(valueID, element){
 	})
 }
 
+function speechBook(title, author, isbn){
+		WatsonSpeech.TextToSpeech.synthesize({
+			text: 'The book '+title+' by '+author+' has ISBN '+isbn,
+			token: token
+		});
+}
 
-
-/*$(document).ready(function() {
-	$('#deleteButton').click(function() {
-		deleteBook();
-	});
-})*/
 
 function deleteBook(valueID, element, parent){
 	console.log('deleteBook');

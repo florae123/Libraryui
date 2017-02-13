@@ -17,6 +17,7 @@
   <script src="js/rentalSketch.js"></script>
   <script src="js/general.js"></script>
   <script src="js/conversation.js"></script>
+  <script src="js/watson-speech.js"></script>
 
 </head>
 <body>
@@ -46,7 +47,7 @@
           <h2>Chat</h2>
         </div>
         <div id="collapseChat" class="panel-collapse collapse">
-          <div class="panel-body">
+          <div class="panel-body conversationBody">
             <div class="row">
               <div class="col-sm-offset-7">
                 <button type="button" class="btn btn-default" id="convStart">Start Conversation</button>
@@ -71,6 +72,64 @@
           </div>
         </div>
       </div>
+
+      <!--<p>
+        Hello This is a test for text-to-speech.
+        <audio id="music" src="C:/dev/src/test/hola_mundo.wav"></audio>
+        <button id="play">Play</button>
+      </p>
+      <script>
+         var token;
+         var rootURLspeech = 'http://localhost:9080/myOtherTest/api/text_to_speech';
+         $(document).ready(function() {
+           function afterToken() {
+             var playButton = document.querySelector('#play');
+             playButton.addEventListener('click', startPlayback);
+             function startPlayback() {
+               WatsonSpeech.TextToSpeech.synthesize({
+                 text: 'Hello World',
+                 token: token,
+                 //autoplay: false
+               });
+             };
+           }
+           $.ajax({
+             url: rootURLspeech,
+             type: 'GET',
+             dataType: 'json',
+             success: function(data){
+               token = data.token;
+               console.log(token);
+               afterToken();
+             },
+             error: function(jqXHR, textStatus, errorThrown){
+               alert('audio error: '+ textStatus);
+             }
+           });
+           //example .play()
+          /*)  function startPlayback() {
+              return document.querySelector('#music').play();
+            }
+
+            console.log('Attempting to play automatically...');
+
+            startPlayback().then(function() {
+              console.log('The play() Promise fulfilled! Rock on!');
+            }).catch(function(error) {
+              console.log('The play() Promise rejected!');
+              console.log('Use the Play button instead.');
+              console.log(error);
+
+              var playButton = document.querySelector('#play');
+              // The user interaction requirement is met if
+              // playback is triggered via a click event.
+              playButton.addEventListener('click', startPlayback);
+              playButton.hidden = false;
+            });*/
+         });
+      </script>
+      <p id="speechTestToken">
+      </p>-->
     </div>
 
     <div class="col-sm-9">
@@ -131,7 +190,7 @@
 
           <div class="collapse" id="bookTableToggle">
             <div class="panel-body">
-              <table class="table table-hover">
+              <table class="table table-hover bookTable">
                 <thead>
                   <tr>
                     <th>ID</th>
@@ -220,10 +279,10 @@
           </div>
           <div class="collapse" id="custTableToggle">
             <div class="panel-body">
-              <table class="table table-hover">
+              <table class="table table-hover customerTable">
                 <thead>
                   <tr>
-                    <th>ID</th>
+                    <th name="idName">ID</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Password</th>
@@ -272,27 +331,37 @@
                   </div>
                 </div>-->
                 <div class="form-group">
-                  <label class="control-label col-sm-2" for="rentalbookid">Book ID:</label>
+                  <!--<label class="control-label col-sm-2" for="rentalbookid">Book ID:</label>
                   <div class="col-sm-5">
                     <input type="text" class="form-control rentalInput" id="rentalbookid" placeholder="Enter Book ID">
+                  </div>-->
+                  <label class="control-label col-sm-2" for="selBid">Book ID:</label>
+                  <div class="col-sm-5">
+                   <select class="form-control" id="selBid">
+                   </select>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-sm-2" for="rentalcustomerid">Customer ID:</label>
+                  <!--<label class="control-label col-sm-2" for="rentalcustomerid">Customer ID:</label>-->
+                  <label class="control-label col-sm-2" for="selCid">Customer ID:</label>
                   <div class="col-sm-5">
-                    <input type="text" class="form-control rentalInput" id="rentalcustomerid" placeholder="Enter Customer ID">
+                   <select class="form-control" id="selCid">
+                   </select>
                   </div>
+                  <!--<div class="col-sm-5">
+                    <input type="text" class="form-control rentalInput" id="rentalcustomerid" placeholder="Enter Customer ID">
+                  </div>-->
                 </div>
                 <div class="form-group">
                   <label class="control-label col-sm-2" for="start">Start Date:</label>
                   <div class="col-sm-5">
-                    <input type="text" class="form-control rentalInput" id="start" placeholder="Enter Start Date as YYYY-MM-DD">
+                    <input type="text" class="form-control rentalInput" id="start" placeholder="YYYY-MM-DD">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="control-label col-sm-2" for="end">End Date:</label>
                   <div class="col-sm-5">
-                    <input type="text" class="form-control rentalInput" id="end" placeholder="Enter End Date as YYYY-MM-DD">
+                    <input type="text" class="form-control rentalInput" id="end" placeholder="YYYY-MM-DD">
                   </div>
                 </div>
                 <div class="form-group">

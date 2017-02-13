@@ -77,6 +77,23 @@ function executeConversation(){
             '<p style="text-align:right;">'+$('#convUserText').val()+'</p>'
             +'<p style="text-align:left;">'+data.output.text+'<br><strong>'+selectedBooks+'</strong></p>'
           );
+        } else if (data.output.hasOwnProperty('books_by_title')) {
+            if(jQuery.isEmptyObject(data.output.books_by_title)){
+              $('#convText').append(
+                '<p style="text-align:right;">'+$('#convUserText').val()+'</p>'
+                +'<p style="text-align:left;">'+data.output.text+'</p>'
+              );
+            } else {
+              var titledBooks = "";
+              var i;
+              for(i=0; i<data.output.books_by_title.length; i++) {
+                titledBooks = titledBooks + data.output.books_by_title[i].id +'<br>'
+              }
+              $('#convText').append(
+                '<p style="text-align:right;">'+$('#convUserText').val()+'</p>'
+                +'<p style="text-align:left;">'+data.output.text+'<br><strong>'+titledBooks+'</strong></p>'
+              );
+            }
         } else {
           $('#convText').append(
             '<p style="text-align:right;">'+$('#convUserText').val()+'</p>'

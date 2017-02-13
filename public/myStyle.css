@@ -28,6 +28,13 @@ h1 {
   background-color: #B7E6D4;
   overflow: auto;
 }
+.conversationBody {
+  /*min-height: 10%;
+  max-height: 10%;*/
+  min-height: 150px;
+  max-height: 450px;
+  overflow-y: scroll;
+}
 .panel-body.bigpopover {
   overflow: visible !important;
 }
@@ -47,6 +54,9 @@ table {
 }
 .table th{
   border-bottom: #54957D solid 2px !important;
+}
+.dateTd {
+  min-width: 90px;
 }
 /*navbar*/
 .navbar-custom {

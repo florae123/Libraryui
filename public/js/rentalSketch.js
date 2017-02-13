@@ -39,7 +39,7 @@ function showRentals() {
 	}).then(function(data) {
 		$.each( data, function( key, val ) {
 			$('#rentalsTableRows').append(
-				'<tr> <td>'+val.id+'</td> <td>'+val.bookuri+'</td> <td>'+val.customeruri+'</td> <td>'+val.start+'</td> <td>'+val.end+'</td>'+
+				'<tr> <td>'+val.id+'</td> <td>'+val.bookuri+'</td> <td>'+val.customeruri+'</td> <td class="dateTd">'+val.start+'</td> <td class="dateTd">'+val.end+'</td>'+
 				'<td>'+'<p><a class="btn btn-default returnBook" data-toggle="popover" data-placement="left" ><span class="glyphicon glyphicon-remove">'+
 				//'<td>'+'<a class="btn btn-default returnBook"><span class="glyphicon glyphicon-send">'+
 				'</span></a></p>'+
@@ -67,23 +67,25 @@ function showRentals() {
 					'<div class="col-sm-offset-2"><strong>Update Rental:</strong></div>'+
 					'<form class="form-horizontal">'+
 						'<div class="form-group">'+
-							'<label class="control-label" for="rentalbookidUpdate">Book ID:</label>'+
-							'<input type="text" class="form-control rentalInput" id="rentalbookidUpdate" placeholder="Enter Book ID">'+
+							'<label class="control-label" for="selBidUpdate">Book ID:</label>'+
+							'<select class="form-control rentalInput" id="selBidUpdate"></select>'+
 						'</div>'+
 						'<div class="form-group">'+
-							'<label class="control-label" for="rentalcustidUpdate">Customer ID:</label>'+
-							'<input type="text" class="form-control rentalInput" id="rentalcustidUpdate" placeholder="Enter Customer ID">'+
+							'<label class="control-label" for="selCidUpdate">Customer ID:</label>'+
+							'<select class="form-control rentalInput" id="selCidUpdate"></select>'+
 						'</div>'+
 						'<div class="form-group">'+
 							'<label class="control-label" for="startUpdate">Start Date:</label>'+
-							'<input type="text" class="form-control rentalInput" id="startUpdate" placeholder="Enter Start Date as YYYY-MM-DD">'+
+							'<input type="text" class="form-control rentalInput" id="startUpdate" placeholder="YYYY-MM-DD">'+
 						'</div>'+
 							'<div class="form-group">'+
 								'<label class="control-label" for="endUpdate">End Date:</label>'+
-								'<input type="text" class="form-control rentalInput" id="endUpdate" placeholder="Enter End Date YYYY-MM-DD">'+
+								'<input type="text" class="form-control rentalInput" id="endUpdate" placeholder="YYYY-MM-DD">'+
 							'</div>'+
 							'<div class="form-group">'+
-								'<button type="button" class="btn btn-default" id="updateRentalbtn">update</button>'+
+								'<button type="button" class="btn btn-default" id="updateRentalbtn">Update</button>'+
+								'&nbsp; <button type="button" class="btn btn-default updateNot">'+
+								'Cancel</button>'
 							'</div>'+
 						'</form>'+
 						'</div>';
@@ -92,6 +94,43 @@ function showRentals() {
 		});
 	});
 }
+
+function dothis(){
+
+}
+
+$(document).on("click", ".updateRental", function (e) {
+	$('.customerTable tr').each(function (i, row) {
+		if(i!=0){
+			var $row = $(row);
+			var $tempCId = $row[0].children[0].innerHTML;
+			$('#selCidUpdate').append(
+				'<option>'+$tempCId+'</option>'
+			);
+		}
+	});
+	$('.bookTable tr').each(function (i, row) {
+		if(i!=0){
+			var $row = $(row);
+			var $tempBId = $row[0].children[0].innerHTML;
+			$('#selBidUpdate').append(
+				'<option>'+$tempBId+'</option>'
+			);
+		}
+	});
+})
+
+$(document).on("click", ".updateNot", function (e) {
+	var elem, evt = e ? e:event;
+	if (evt.srcElement)  elem = evt.srcElement;
+	else if (evt.target) elem = evt.target;
+
+	var parent = elem.parentElement;
+	while(!(parent.tagName=='TD')) {
+		parent = parent.parentElement;
+	}
+	$(parent.children[1].children[0]).trigger('click');
+})
 
 $(document).on("click", ".returnNot", function (e) {
 	var elem, evt = e ? e:event;
@@ -285,8 +324,8 @@ function addRental() {
 function formToJSONRental() {
 	return JSON.stringify({
 		"id": $('#rentalId').val(),
-		"bookid": $('#rentalbookid').val(),
-		"customerid": $('#rentalcustomerid').val(),
+		"bookid": $('#selBid').find("option:selected").text(),
+		"customerid": $('#selCid').find("option:selected").text(), //$('#rentalcustomerid').val(),
 		"start": $('#start').val(),
     "end": $('#end').val(),
 		});
@@ -295,11 +334,12 @@ function formToJSONRental() {
 function formToJSONRentalUpdate(valueID) {
 	return JSON.stringify({
 		"id": valueID,
-		"bookid": $('#rentalbookidUpdate').val(),
-		"customerid": $('#rentalcustidUpdate').val(),
+		"bookid": $('#selBidUpdate').find("option:selected").text(), //$('#rentalbookidUpdate').val(),
+		"customerid": $('#selCidUpdate').find("option:selected").text(), //$('#rentalcustidUpdate').val(),
 		"start": $('#startUpdate').val(),
     "end": $('#endUpdate').val(),
 		});
 }
+
 
 }
