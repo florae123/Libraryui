@@ -29,9 +29,7 @@ function executeConversation(){
   var lastContext = null;
 
   $(document).ready(function() {
-      $('#convStart').click(function() {
         startConv();
-      })
   });
 
   $(document).ready(function() {
