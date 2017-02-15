@@ -1,31 +1,22 @@
-/*$('#bookdiv a').click(function(e) {
-  e.preventDefault();
-  $(this).tab('show');
-});
-
-$('#customerDivdiv a').click(function(e) {
-  e.preventDefault();
-  $(this).tab('show');
-});
-
-// store the currently selected tab in the hash value
-$("#bookLink").on("shown.bs.tab", function(e) {
-  var id = $(e.target).attr("href").substr(1);
-  window.location.hash = id;
-});
-// on load of the page: switch to the currently selected tab
-//var hash = window.location.hash;
-//$('#bookdiv a[href="' + hash + '"]').tab('show');*/
-
-/*$(document).ready(function() {
-    if (location.hash) {
-        $("a[href='" + location.hash + "']").tab("show");
+var myurl = window.location.host;
+var protocol = window.location.protocol;
+myurlapi = protocol + '//' + myurl + "/apiuri";
+console.log('The rootURLapi is found at: '+myurlapi);
+  $.ajax({
+    type: 'GET',
+    url: myurlapi,
+    dataType: 'json', // data type of response
+    success: function(data){
+      rootURL1 = data.uri;
+      console.log('The rootURL1 is: '+rootURL1);
+      execute();
+      executeRental();
+      executeCustomer();
+      executeConversation();
     }
-    $(document.body).on("click", "a[data-toggle]", function(event) {
-        location.hash = this.getAttribute("href");
-    });
-});
-$(window).on("popstate", function() {
-    var anchor = location.hash || $("a[data-toggle='tab']").first().attr("href");
-    $("a[href='" + anchor + "']").tab("show");
-});*/
+  });
+var rootURLspeechNode = protocol + '//' + myurl + "/gettoken";
+console.log('url tts token: '+rootURLspeechNode);
+var rootURLstartConv = protocol + '//' + myurl + "/startConv";
+var rootURLconChat = protocol + '//' + myurl + "/say";
+console.log('url conv start: '+rootURLstartConv);

@@ -9,15 +9,13 @@
   <link rel="stylesheet" href="js/bootstrap-3.3.7-dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="otherStyle.css"> <!-- otherStyle or myStyle.css -->
   <script src="js/jquery.bootstrap-growl.min.js"></script>
-  <script>
-    var rootURL1;
-  </script>
+  <!--<script src="js/general.js"></script>-->
   <script src="js/booksketch.js"></script>
   <script src="js/customerSketch.js"></script>
   <script src="js/rentalSketch.js"></script>
-  <script src="js/general.js"></script>
   <script src="js/conversation.js"></script>
   <script src="js/watson-speech.js"></script>
+  <script src="js/general.js"></script>
 
 </head>
 <body>
@@ -75,64 +73,6 @@
           </div>
         </div>
       </div>
-
-      <!--<p>
-        Hello This is a test for text-to-speech.
-        <audio id="music" src="C:/dev/src/test/hola_mundo.wav"></audio>
-        <button id="play">Play</button>
-      </p>
-      <script>
-         var token;
-         var rootURLspeech = 'http://localhost:9080/myOtherTest/api/text_to_speech';
-         $(document).ready(function() {
-           function afterToken() {
-             var playButton = document.querySelector('#play');
-             playButton.addEventListener('click', startPlayback);
-             function startPlayback() {
-               WatsonSpeech.TextToSpeech.synthesize({
-                 text: 'Hello World',
-                 token: token,
-                 //autoplay: false
-               });
-             };
-           }
-           $.ajax({
-             url: rootURLspeech,
-             type: 'GET',
-             dataType: 'json',
-             success: function(data){
-               token = data.token;
-               console.log(token);
-               afterToken();
-             },
-             error: function(jqXHR, textStatus, errorThrown){
-               alert('audio error: '+ textStatus);
-             }
-           });
-           //example .play()
-          /*)  function startPlayback() {
-              return document.querySelector('#music').play();
-            }
-
-            console.log('Attempting to play automatically...');
-
-            startPlayback().then(function() {
-              console.log('The play() Promise fulfilled! Rock on!');
-            }).catch(function(error) {
-              console.log('The play() Promise rejected!');
-              console.log('Use the Play button instead.');
-              console.log(error);
-
-              var playButton = document.querySelector('#play');
-              // The user interaction requirement is met if
-              // playback is triggered via a click event.
-              playButton.addEventListener('click', startPlayback);
-              playButton.hidden = false;
-            });*/
-         });
-      </script>
-      <p id="speechTestToken">
-      </p>-->
     </div>
 
     <div class="col-sm-9">

@@ -1,27 +1,3 @@
-var protocol = window.location.protocol;
-if(protocol=="file:" || protocol=='http:'){
-	console.log("You are in the local files.");
-	var rootURL1 = 'http://localhost:9080/myOtherTest/api';
-	execute();
-} else {
-	var myurl = window.location.host;
-	console.log("location.host: " +myurl);
-	var protocol = window.location.protocol;
-	console.log("location.protocol: " +protocol);
-	myurl = protocol + '//' + myurl + "/apiuri";
-	console.log('The rootURL1 is found at: '+myurl);
-		$.ajax({
-			type: 'GET',
-			url: myurl,
-			dataType: 'json', // data type of response
-			success: function(data){
-				rootURL1 = data.uri;
-				console.log('The rootURL1 is: '+rootURL1);
-				execute();
-			}
-		});
-}
-
 
 function execute(){
 
@@ -31,7 +7,7 @@ var rootURLspeech = rootURL1 + '/text_to_speech';
 console.log(rootURLspeech);
 var token;
 
-$.ajax({
+/*$.ajax({
 	url: rootURLspeech,
 	type: 'GET',
 	dataType: 'json',
@@ -41,6 +17,18 @@ $.ajax({
 	},
 	error: function(jqXHR, textStatus, errorThrown){
 		alert('audio error: '+ textStatus);
+	}
+});*/
+
+$.ajax({
+	url: rootURLspeechNode,
+	type: 'GET',
+	success: function(data){
+		token = data;
+		console.log("token: "+token);
+	},
+	error: function(jqXHR, textStatus, errorThrown){
+		alert('audio error Nodejs: '+ textStatus);
 	}
 });
 

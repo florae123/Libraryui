@@ -1,26 +1,3 @@
-var protocol = window.location.protocol;
-if(protocol=="file:" || protocol=='http:'){
-	console.log("You are in the local files.");
-	var rootURL1 = 'http://localhost:9080/myOtherTest/api';
-	executeConversation();
-} else {
-	var myurl = window.location.host;
-	console.log("location.host: " +myurl);
-	var protocol = window.location.protocol;
-	console.log("location.protocol: " +protocol);
-	myurl = protocol + '//' + myurl + "/apiuri";
-	console.log('The rootURL1 is found at: '+myurl);
-		$.ajax({
-			type: 'GET',
-			url: myurl,
-			dataType: 'json', // data type of response
-			success: function(data){
-				rootURL1 = data.uri;
-				console.log('The rootURL1 is: '+rootURL1);
-				executeConversation();
-			}
-		});
-}
 
 function executeConversation(){
   var rootURLconv = rootURL1 + "/conversation"
@@ -42,7 +19,7 @@ function executeConversation(){
     endConv();
     $.ajax({
       type: 'GET',
-      url: rootURLconv,
+      url: rootURLstartConv,
       success: function(data, textStatus, jqXHR){
         lastContext = data.context;
         $('#convText').append(
@@ -60,7 +37,7 @@ function executeConversation(){
     $.ajax({
       type: 'PUT',
       contentType: 'application/json',
-      url: rootURLconv,
+      url: rootURLconChat,//rootURLconv,
       dataType: 'json',
       data: giveData(),
       success: function(data, textStatus, jqXHR){
