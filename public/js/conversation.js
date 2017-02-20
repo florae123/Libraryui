@@ -1,7 +1,5 @@
 
 function executeConversation(){
-  var rootURLconv = rootURL1 + "/conversation"
-  console.log(rootURLconv);
 
   var lastContext = null;
 
