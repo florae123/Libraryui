@@ -18,7 +18,8 @@ var vcapServices;
 if(!process.env.VCAP_SERVICES){
       //vcapServices = require('.env');
       var path = require('path');
-      vcapServices = require( path.resolve( __dirname, "./.env.json" ) );
+      vcapServices = require( path.resolve( __dirname, "./env.json" ) );
+      console.log(vcapServices);
 }
 else {
   vcapServices = JSON.parse(process.env.VCAP_SERVICES);
