@@ -26,7 +26,7 @@ else {
 }
 //console.log(vcapServices);
 
-var libraryURI = (process.env.LIBRARY_URI || 'http://localhost:9080/myOtherTest/api');
+var libraryURI = (process.env.LIBRARY_URI || 'http://localhost:9080/library-server-java/api');
 console.log("The Library URI is: " + libraryURI);
 // New call to compress content
 app.use(express.static(__dirname + '/public'));

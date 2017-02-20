@@ -5,7 +5,7 @@ It is built with a Cloudant NoSQL Database, a Watson Text-To-Speech Service and 
 
 ##Deploy to Bluemix
 
-1. Deploy the Java Backend to Bluemix [https://github.com/florae123/library-server-java](https://github.com/florae123/library-server-java) and bind it to a Cloudant NoSQL Database.
+1. Deploy the Java back end to Bluemix [https://github.com/florae123/library-server-java](https://github.com/florae123/library-server-java) and bind it to a Cloudant NoSQL Database.
 
 2. Clone the app to your local environment from your terminal using the following command
 
