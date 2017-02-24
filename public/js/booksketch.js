@@ -25,7 +25,7 @@ $.ajax({
 	type: 'GET',
 	success: function(data){
 		token = data;
-		console.log("token: "+token);
+		//console.log("token: "+token);
 	},
 	error: function(jqXHR, textStatus, errorThrown){
 		alert('audio error Nodejs: '+ textStatus);

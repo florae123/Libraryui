@@ -19,7 +19,7 @@ if(!process.env.VCAP_SERVICES){
       //vcapServices = require('.env');
       var path = require('path');
       vcapServices = require( path.resolve( __dirname, "./env.json" ) );
-      console.log(vcapServices);
+      //console.log(vcapServices);
 }
 else {
   vcapServices = JSON.parse(process.env.VCAP_SERVICES);
@@ -38,14 +38,16 @@ app.get('/apiuri', function(req, res) {
 });
 
 //authenticate conversation service
+var workspace_id_testcopy = '1205822a-1615-4d21-9f0b-b0cac7c3ae82';
+//my other workspace id: '90ce6c55-d9b1-4688-bd7a-195d2b439bd6';
 var conversation = watson.conversation({
   username: vcapServices.conversation[0].credentials.username,
   password: vcapServices.conversation[0].credentials.password,
-  path: { workspace_id: '90ce6c55-d9b1-4688-bd7a-195d2b439bd6' },
+  path: { workspace_id: workspace_id_testcopy },
   version: 'v1',
-  version_date: '2016-09-20'
+  //version_date: '2016-09-20'
+  version_date: '2017-02-03'
 });
-//console.log(conversation);
 
 //authorization token text to speech
 app.get('/gettoken', function(req, res) {

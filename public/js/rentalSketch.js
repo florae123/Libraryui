@@ -342,6 +342,7 @@ function addRental() {
 	});
 }
 
+
 // Helper function to serialize all the form fields into a JSON string
 function formToJSONRental() {
 	return JSON.stringify({
@@ -364,4 +365,36 @@ function formToJSONRentalUpdate(valueID) {
 }
 
 
+}
+
+//outside of executeRental()
+//adds rentals from conversation
+function addRentalConv(bookid, custid, startDate, endDate) {
+  console.log('addRental from chat');
+  $.ajax({
+    type: 'POST',
+    contentType: 'application/json',
+    url: rootURL1 + "/rentals",
+    //dataType: "json",
+    data: formToJSONRentalConv(bookid, custid, startDate, endDate),
+    success: function(data, textStatus, jqXHR){
+      executeRental();
+      $('.rentalInput').val('');
+      $.bootstrapGrowl("The rental has been registered.", {type:'success', delay: 2000});
+    },
+    error: function(jqXHR, textStatus, errorThrown){
+      alert('addRental error: ' + textStatus);
+    }
+  });
+}
+
+
+//Helper function for addRentalConv
+function formToJSONRentalConv(bookid, customerid, startDate, endDate) {
+  return JSON.stringify({
+		"bookid": bookid,
+		"customerid": customerid,
+		"start": startDate,
+    "end": endDate,
+		});
 }
