@@ -133,7 +133,7 @@ function executeConversation(){
   function giveData(){
     var inputText = $('#convUserText').val();
     //conversation service does not accept input text containing line breaks
-    inputText = inputText.replace(/(\r\n|\n|\r)/gm," ");
+    inputText = inputText.replace(/(\r\n|\n|\r)/gm,"");
     var input = {"user_input": inputText, "context": lastContext};
     return JSON.stringify(input);
   }
