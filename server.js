@@ -2,13 +2,10 @@ var express = require('express');
 var cors = require('cors');
 var app = express();
 var request = require('request');
-var myconversation = require('./chatservice.js');
 var watson = require('watson-developer-cloud');
 var bodyParser = require('body-parser');
 app.use(bodyParser.json()); // for parsing application/json
 
-
-myconversation.hello();
 
 
 app.use(cors());
@@ -38,12 +35,12 @@ app.get('/apiuri', function(req, res) {
 });
 
 //authenticate conversation service
-var workspace_id_testcopy = '1205822a-1615-4d21-9f0b-b0cac7c3ae82';
+var workspace_id_copy = '1205822a-1615-4d21-9f0b-b0cac7c3ae82';
 //my other workspace id: '90ce6c55-d9b1-4688-bd7a-195d2b439bd6';
 var conversation = watson.conversation({
   username: vcapServices.conversation[0].credentials.username,
   password: vcapServices.conversation[0].credentials.password,
-  path: { workspace_id: workspace_id_testcopy },
+  path: { workspace_id: workspace_id_copy },
   version: 'v1',
   //version_date: '2016-09-20'
   version_date: '2017-02-03'
@@ -51,7 +48,7 @@ var conversation = watson.conversation({
 
 //authorization token text to speech
 app.get('/gettoken', function(req, res) {
-   // aus VCAP lesen
+   // read from VCAP services
    var tts_username = vcapServices.text_to_speech[0].credentials.username;
    var tts_password = vcapServices.text_to_speech[0].credentials.password;
 
