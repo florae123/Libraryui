@@ -9,22 +9,22 @@ It is built with a Cloudant NoSQL Database, a Watson Text-To-Speech Service and 
 
 2. Clone the app to your local environment from your terminal using the following command
 
-  ```
-  git clone https://github.com/florae123/Libraryui
-  ```
+    ```
+    git clone https://github.com/florae123/Libraryui
+    ```
 
 3. Open the file **manifest.yml** and change the host name to something unique. Change the "LIBRARY_URI" to the URL of your java library server and add "/api" at the end.
 
 4. Log in to your Bluemix account using the Cloud Foundry CLI tool.
 
 	```
-	$ cf login
+	cf login
 	```
 
 5. Push the app to Bluemix.
 
 	```
-	$ cf push LibraryUI
+	cf push LibraryUI
 	```
 
 6. Create a Watson Text-To-Speech Service and connect it to the app LibraryUI.
