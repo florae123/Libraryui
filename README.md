@@ -3,7 +3,7 @@ A Node.JS Server and the Web UI for a Library App.
 
 It is built with a Cloudant NoSQL Database, a Watson Text-To-Speech Service and a Watson Conversation Service, HTML, CSS, Bootstrap and jQuery.
 
-##Deploy to Bluemix
+## Deploy to Bluemix
 
 1. Deploy the Java back end to Bluemix [https://github.com/florae123/library-server-java](https://github.com/florae123/library-server-java) and bind it to a Cloudant NoSQL Database.
 
@@ -12,6 +12,7 @@ It is built with a Cloudant NoSQL Database, a Watson Text-To-Speech Service and 
   ```
   git clone https://github.com/florae123/Libraryui
   ```
+
 3. Open the file **manifest.yml** and change the host name to something unique. Change the "LIBRARY_URI" to the URL of your java library server and add "/api" at the end.
 
 4. Log in to your Bluemix account using the Cloud Foundry CLI tool.

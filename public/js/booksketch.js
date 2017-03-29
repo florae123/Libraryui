@@ -20,6 +20,7 @@ var token;
 	}
 });*/
 
+//get token
 $.ajax({
 	url: rootURLspeechNode,
 	type: 'GET',
