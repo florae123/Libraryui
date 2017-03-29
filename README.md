@@ -30,3 +30,4 @@ It is built with a Cloudant NoSQL Database, a Watson Text-To-Speech Service and 
 6. Create a Watson Text-To-Speech Service and connect it to the app LibraryUI.
 
 7. Create a Watson Conversation Service and bind it to the app. Launch, and import a workspace using the file **conversation-workspace.json**.
+Copy the workspace id and replace it with the current value for *workspace_id_copy* in line 38 in **server.js**.
