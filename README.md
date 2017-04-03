@@ -57,27 +57,27 @@ This first part is a backend server running on Java Liberty on Bluemix that conn
 
 7. Create a Watson Conversation Service and bind it to the app. Launch, and import a workspace using the file **conversation-workspace.json**. Connect it to the app.
 
-* Select **Conversation** from the Bluemix Catalog in your Browser, make sure the *Free* pricing plan is selected and click **Create**. You will be directed to a view of the service.
-* To bind this service instance to the node.js application, open the **Connections** panel, and click **Create Connection**. Then select the LibraryUI applicaton and click **Connect**. Restage the application when prompted.
-* Open the **Manage** panel and click **Launch tool**.
+    * Select **Conversation** from the Bluemix Catalog in your Browser, make sure the *Free* pricing plan is selected and click **Create**. You will be directed to a view of the service.
+    * To bind this service instance to the node.js application, open the **Connections** panel, and click **Create Connection**. Then select the LibraryUI applicaton and click **Connect**. Restage the application when prompted.
+    * Open the **Manage** panel and click **Launch tool**.
 
-    ![Launch](./images/launch-conv.png)
+        ![Launch](./images/launch-conv.png)
 
-* Under **Create workspace**, click **Import**.
-* Choose the file **conversation-workspace** from your local copy of the LibraryUI directory, select **Everything (Intents, Entities, and Dialog)**, and click **Import**.
+    * Under **Create workspace**, click **Import**.
+    * Choose the file **conversation-workspace.json** from your local copy of the LibraryUI directory, select **Everything (Intents, Entities, and Dialog)**, and click **Import**.
 
-    ![import](./images/import-workspace-2.png)
+        ![import](./images/import-workspace-2.png)
 
-* Go **back to workspaces** and click **View Details** on the Libray Helper workspace.
+    * Go **back to workspaces** and click **View Details** on the Libray Helper workspace.
 
-    ![details](./images/workspace-id.png)
+        ![details](./images/workspace-id.png)
 
-* Copy the **Workspace ID** to the clipboard.
-* Replace it with the current value for *workspace_id_copy* in line 38 in **server.js**.
+    * Copy the **Workspace ID** to the clipboard.
+    * Replace it with the current value for *workspace_id_copy* in line 38 in **server.js**.
 
-    ```
-    //authenticate conversation service
-    var workspace_id_copy = 'YOUR_WORKSPACE_ID';
-    ```
+        ```
+        //authenticate conversation service
+        var workspace_id_copy = 'YOUR_WORKSPACE_ID';
+        ```
 
-* Redeploy the application by repeating step 5: ```cf push LibraryUI```
+    * Redeploy the application by repeating step 5: ```cf push LibraryUI```
