@@ -1,7 +1,7 @@
 applications:
 - name: LibraryUI
-  host: LibraryUI
+  host: LibraryUI-[myName]
   env:
-    LIBRARY_URI: "https://libraryserver.eu-gb.mybluemix.net/api"
+    LIBRARY_URI: "https://libraryserver-[myName].eu-gb.mybluemix.net/api"
   memory: 64M
   instances: 1

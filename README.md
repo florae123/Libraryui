@@ -1,7 +1,13 @@
 # LibraryUI
-A Node.JS Server and the Web UI for a Library App.
 
-It is built with a Cloudant NoSQL Database, a Watson Text-To-Speech Service and a Watson Conversation Service, HTML, CSS, Bootstrap and jQuery.
+This is the second part of the Library Application: [https://github.com/florae123/LibraryApp](https://github.com/florae123/LibraryApp).
+
+This part consists of a Node.js server and the web UI.
+It is built using HTML, CSS, Bootstrap, jQuery, and a Watson Text-To-Speech Service as well as a Watson Conversation Service.
+
+This first part is a backend server running on Java Liberty on Bluemix that connects to a Cloudant NoSQL Database.
+
+  ![Architecture](./images/lib-architecture-node.jpg)
 
 ## Deploy to Bluemix
 
@@ -13,7 +19,17 @@ It is built with a Cloudant NoSQL Database, a Watson Text-To-Speech Service and 
     git clone https://github.com/florae123/Libraryui
     ```
 
-3. Open the file **manifest.yml** and change the host name to something unique. Change the "LIBRARY_URI" to the URL of your java library server and add "/api" at the end.
+3. You can find the URL of your java library server under **All Apps** on the Bluemix dashboard for the region you used. Copy the URL.
+
+  ![dashboard-click](dashboard.png)
+
+  ![url](java-url.png)
+
+Open the file **manifest.yml** and change the "LIBRARY_URI" to the URL of your java library server and add "/api" at the end.
+
+Change the host name *LibraryUI-[myName]* to something unique. (For example, you might replace [myName] with your name.)
+
+    ![manifest](./images/manifest.png)
 
 4. Log in to your Bluemix account using the Cloud Foundry CLI tool.
 
