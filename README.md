@@ -60,7 +60,9 @@ This first part is a backend server running on Java Liberty on Bluemix that conn
 * Select **Conversation** from the Bluemix Catalog in your Browser, make sure the *Free* pricing plan is selected and click **Create**. You will be directed to a view of the service.
 * To bind this service instance to the node.js application, open the **Connections** panel, and click **Create Connection**. Then select the LibraryUI applicaton and click **Connect**. Restage the application when prompted.
 * Open the **Manage** panel and click **Launch tool**.
-    ![Launch](./images/launch-conv-png)
+
+    ![Launch](./images/launch-conv.png)
+
 * Under **Create workspace**, click **Import**.
 * Choose the file **conversation-workspace** from your local copy of the LibraryUI directory, select **Everything (Intents, Entities, and Dialog)**, and click **Import**.
 
