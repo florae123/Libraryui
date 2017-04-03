@@ -27,23 +27,19 @@ This first part is a backend server running on Java Liberty on Bluemix that conn
 
     ![url](./images/java-url.png)
 
-    Open the file **manifest.yml** and change the **"LIBRARY_URI"** to the URL of your java library server and add **"/api"** at the end.
-
-    **https://[YOUR_LIBRARY_SERVER_URL]/api**
+    Open the file **manifest.yml** and change the **"LIBRARY_URI"** to the URL of your java library server and add **"/api"** at the end: **https://[YOUR_LIBRARY_SERVER_URL]/api**
 
     Change the host name *LibraryUI-[myName]* to something unique. (For example, you might replace [myName] with your name.)
 
     ```
     applications:
-    - name: libraryui-tsuedbro
+    - name: LibraryUI
       host: libraryui-tsuedbro
       env:
         LIBRARY_URI: "https://library-server-tsuedbro.mybluemix.net/api"
       memory: 64M
       instances: 1
     ```
-
-    ![manifest](./images/manifest.png)
 
 4. Log in to your Bluemix account using the Cloud Foundry CLI tool.
 
