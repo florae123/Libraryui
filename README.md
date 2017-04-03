@@ -27,7 +27,7 @@ This first part is a backend server running on Java Liberty on Bluemix that conn
 
     ![url](./images/java-url.png)
 
-    Open the file **manifest.yml** and change the "LIBRARY_URI" to the URL of your java library server and add "/api" at the end.
+    Open the file **manifest.yml** and change the **"LIBRARY_URI"** to the URL of your java library server and add **"/api"** at the end.
 
     Change the host name *LibraryUI-[myName]* to something unique. (For example, you might replace [myName] with your name.)
 
