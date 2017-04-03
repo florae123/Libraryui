@@ -57,3 +57,10 @@ This first part is a backend server running on Java Liberty on Bluemix that conn
 
 7. Create a Watson Conversation Service and bind it to the app. Launch, and import a workspace using the file **conversation-workspace.json**.
 Copy the workspace id and replace it with the current value for *workspace_id_copy* in line 38 in **server.js**.
+
+    ```
+    //authenticate conversation service
+    var workspace_id_copy = 'YOUR_WORKSPACE_ID';
+    ```
+
+    Redeploy the application by repeating step 5: ```cf push LibraryUI```
