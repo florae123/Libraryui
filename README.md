@@ -19,17 +19,19 @@ This first part is a backend server running on Java Liberty on Bluemix that conn
     git clone https://github.com/florae123/Libraryui
     ```
 
-3. You can find the URL of your java library server under **All Apps** on the Bluemix dashboard for the region you used. Copy the URL.
+3. You can find the URL of your java library server under **All Apps** on the Bluemix dashboard for the region you used.
 
-  ![dashboard-click](./images/dashboard.png)
+    ![dashboard-click](./images/dashboard.png)
 
-  ![url](./images/java-url.png)
+    Copy the URL.
 
-Open the file **manifest.yml** and change the "LIBRARY_URI" to the URL of your java library server and add "/api" at the end.
+    ![url](./images/java-url.png)
 
-Change the host name *LibraryUI-[myName]* to something unique. (For example, you might replace [myName] with your name.)
+    Open the file **manifest.yml** and change the "LIBRARY_URI" to the URL of your java library server and add "/api" at the end.
 
-  ![manifest](./images/manifest.png)
+    Change the host name *LibraryUI-[myName]* to something unique. (For example, you might replace [myName] with your name.)
+
+    ![manifest](./images/manifest.png)
 
 4. Log in to your Bluemix account using the Cloud Foundry CLI tool.
 
